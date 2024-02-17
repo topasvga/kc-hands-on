@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kep-library
+spec:
+  replicas: 2
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: kep-library
+  template:
+    metadata:
+      labels:
+        app: kep-library
+    spec:
+      containers:
+        # example) kc-handson.kr-central-1.kcr.dev/hands-on/kep-library:v1
+      - image: kakao-infraeng-dev-pz.kr-central-1.kcr.dev/hands-on/kep-library:v1
+        name: kep-library
+        ports:
+        - containerPort: 8080
+      imagePullSecrets:
+        - name: handson-cr
